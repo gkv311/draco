@@ -18,6 +18,26 @@
 #include <cstdlib>
 #include <map>
 #include <string>
+#include <cmath>
+
+// workaround old GCC 4.9
+#if defined(__ANDROID__) && !defined(__clang__)
+#include <sstream>
+#if !defined(_LP64)
+  inline double log2(double theNumber) { return ::log(theNumber) / ::log(2); }
+#endif
+namespace std {
+  template<typename T> std::string to_string(const T& theNumber) {
+    std::ostringstream aStream;
+    aStream << theNumber;
+    return aStream.str();
+  }
+  inline float strtof(const char* nptr, char** endptr) { return ::strtof(nptr, endptr); }
+#if !defined(_LP64)
+  inline double log2(double theNumber) { return ::log2(theNumber); }
+#endif
+}
+#endif
 
 namespace draco {
 

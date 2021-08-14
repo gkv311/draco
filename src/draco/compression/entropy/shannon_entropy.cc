@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "draco/compression/entropy/rans_symbol_coding.h"
+#include "draco/core/options.h"
 
 namespace draco {
 
